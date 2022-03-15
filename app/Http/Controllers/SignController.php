@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gym;
+use App\Models\Sign;
 use Illuminate\Http\Request;
 
-class GymController extends Controller
+class SignController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     public function index()
     {
-        return view('Gym');
+        return view('Activity.sign');
     }
 
     /**
@@ -41,10 +46,10 @@ class GymController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Sign  $sign
      * @return \Illuminate\Http\Response
      */
-    public function show(Gym $gym)
+    public function show(Sign $sign)
     {
         //
     }
@@ -52,10 +57,10 @@ class GymController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Sign  $sign
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gym $gym)
+    public function edit(Sign $sign)
     {
         //
     }
@@ -64,10 +69,10 @@ class GymController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Sign  $sign
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gym $gym)
+    public function update(Request $request, Sign $sign)
     {
         //
     }
@@ -75,10 +80,10 @@ class GymController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Sign  $sign
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gym $gym)
+    public function destroy(Sign $sign)
     {
         //
     }

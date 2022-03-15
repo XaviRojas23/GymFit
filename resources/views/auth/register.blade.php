@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" novalidate>
                         @csrf
 
                         <div class="row mb-3">
@@ -53,11 +53,25 @@
                             </div>
                         </div>
 
+
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="tlf" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
+                            <div class="col-md-6">
+                                <input id="tlf" type="tel" class="form-control @error('tlf') is-invalid @enderror" name="tlf" value="{{ old('tlf') }}" required
+                        autocomplete="tlf" autofocus>
+                                @error('tlf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
