@@ -22,5 +22,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home' , [App\Http\Controllers\GymController::class, 'index'])->name('gym');
-Route::get('/signActivities' , [App\Http\Controllers\SignController::class, 'index'])->name('sign');
+Route::get('/GymFit/signActivities' , [App\Http\Controllers\SignController::class, 'index'])->name('sign');
+Route::get('/GymFit/create' , [App\Http\Controllers\SignController::class, 'create'])->name('create');
 
