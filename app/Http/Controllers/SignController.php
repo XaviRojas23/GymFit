@@ -29,7 +29,7 @@ class SignController extends Controller
      */
     public function create()
     {
-        return "hola";
+        return view('Activity.create');
     }
 
     /**

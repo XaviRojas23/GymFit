@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gym;
+use App\Models\Activity;
+use App\Models\Categoria;
+use App\Models\Dificultad;
 use Illuminate\Http\Request;
 
-class GymController extends Controller
+class ActivityController extends Controller
 {
+    public function __construct()
+    {
+    $this->middleware(['auth', 'verified']);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
     public function index()
     {
-        return view('Gym');
+        //
     }
 
     /**
@@ -28,7 +30,10 @@ class GymController extends Controller
      */
     public function create()
     {
+        $categorias = Categoria::all();
+        $dificultades = Dificultad::all();
 
+        return view('Activity.create', compact('categorias','dificultades'));
     }
 
     /**
@@ -45,10 +50,10 @@ class GymController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show(Gym $gym)
+    public function show(Activity $activity)
     {
         //
     }
@@ -56,10 +61,10 @@ class GymController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gym $gym)
+    public function edit(Activity $activity)
     {
         //
     }
@@ -68,10 +73,10 @@ class GymController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gym $gym)
+    public function update(Request $request, Activity $activity)
     {
         //
     }
@@ -79,10 +84,10 @@ class GymController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Gym  $gym
+     * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gym $gym)
+    public function destroy(Activity $activity)
     {
         //
     }
