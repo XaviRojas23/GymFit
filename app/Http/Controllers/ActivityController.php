@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Categoria;
 use App\Models\Dificultad;
+use App\Models\Lugar;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
     public function __construct()
     {
-    $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified']);
     }
     /**
      * Display a listing of the resource.
@@ -32,8 +33,10 @@ class ActivityController extends Controller
     {
         $categorias = Categoria::all();
         $dificultades = Dificultad::all();
+        $lugares = Lugar::all();
 
-        return view('Activity.create', compact('categorias','dificultades'));
+
+        return view('Activity.create', compact('categorias','dificultades','lugares'));
     }
 
     /**
@@ -44,7 +47,16 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'categoria_id' => 'required|exists:App\Categoria,id',
+            'dificultad_id' => 'required',
+            'lugar_id' => 'required',
+
+        ]);
+
+
+        dd('hola');
     }
 
     /**

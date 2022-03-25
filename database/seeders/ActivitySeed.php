@@ -22,6 +22,8 @@ class ActivitySeed extends Seeder
             'Descripcion' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             'Categoria' => 'Fuerza',
             'Dificultad' => 'Dificil',
+            'inicio'=>'11:00',
+            'fin'=>'12:00',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -30,6 +32,8 @@ class ActivitySeed extends Seeder
             'Descripcion' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             'Categoria' => 'Fuerza',
             'Dificultad' => 'Medio',
+            'inicio'=>'11:00',
+            'fin'=>'12:00',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -38,6 +42,8 @@ class ActivitySeed extends Seeder
             'Descripcion' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             'Categoria' => 'Fuerza',
             'Dificultad' => 'Facil',
+            'inicio'=>'11:00',
+            'fin'=>'12:00',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -71,6 +77,21 @@ class ActivitySeed extends Seeder
         ]);
         DB::table('dificultades')->insert([
             'name' => 'Dificil',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('lugares')->insert([
+            'name' => 'Gimnasio',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('lugares')->insert([
+            'name' => 'Sala1',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('lugares')->insert([
+            'name' => 'Sala2',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
