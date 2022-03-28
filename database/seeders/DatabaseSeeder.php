@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Dificultad;
+use App\Models\Lugar;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(GymSeeder::class);
-        $this->call(ActivitySeed::class);
+        $this->call(CategoriaSeed::class);
+        $this->call(DificultadSeed::class);
+        $this->call(LugarSeed::class);
+
     }
 }

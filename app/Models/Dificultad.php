@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Dificultad extends Model
 {
     use HasFactory;
-    public $table = 'dificultades';
+    public $table = 'dificultads';
 }

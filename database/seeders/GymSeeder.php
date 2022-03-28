@@ -22,6 +22,7 @@ class GymSeeder extends Seeder
             'email' => 'xrf@gmail.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('12345678'),
+            'tlf' => '666444300',
             'created_At' => Carbon::now(),
             'updated_At' => Carbon::now()
         ]);
@@ -30,6 +31,7 @@ class GymSeeder extends Seeder
             'email' => 'duki@gmail.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('12345678'),
+            'tlf' => '666444300',
             'created_At' => Carbon::now(),
             'updated_At' => Carbon::now()
         ]);
@@ -38,6 +40,7 @@ class GymSeeder extends Seeder
             'email' => 'paulo@gmail.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('12345678'),
+            'tlf' => '666444300',
             'created_At' => Carbon::now(),
             'updated_At' => Carbon::now()
         ]);

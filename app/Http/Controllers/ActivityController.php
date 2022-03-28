@@ -21,7 +21,9 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = Activity::where('user_id', auth()->user()->id)->get();
+
+        return view('Activity.sign', compact('activities'));
     }
 
     /**
@@ -32,11 +34,11 @@ class ActivityController extends Controller
     public function create()
     {
         $categorias = Categoria::all();
-        $dificultades = Dificultad::all();
-        $lugares = Lugar::all();
+        $dificultads = Dificultad::all();
+        $lugars = Lugar::all();
 
 
-        return view('Activity.create', compact('categorias','dificultades','lugares'));
+        return view('Activity.create', compact('categorias','dificultads','lugars'));
     }
 
     /**
@@ -49,14 +51,26 @@ class ActivityController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'categoria_id' => 'required|exists:App\Categoria,id',
-            'dificultad_id' => 'required',
-            'lugar_id' => 'required',
-
+            'descripcion' => 'required',
+            'categoria' => 'required',
+            'dificultad' => 'required',
+            'lugar' => 'required',
+            'inicio' => 'date_format:H:i',
+            'fin' => 'date_format:H:i|after:inicio'
         ]);
 
+         auth()->user()->activity()->create([
+            'name' => $data ['name'],
+            'descripcion' => $data ['descripcion'],
+            'categoria_id' => $data ['categoria'],
+            'dificultad_id' => $data ['dificultad'],
+            'lugar_id' => $data ['lugar'],
+            'inicio' => $data ['inicio'],
+            'fin'=> $data ['fin']
+        ]);
 
-        dd('hola');
+        return redirect()->action([SignController::class , 'index']);
+
     }
 
     /**

@@ -23,7 +23,7 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('/home' , [App\Http\Controllers\GymController::class, 'index'])->name('gym');
-    Route::get('/GymFit/signActivities' , [App\Http\Controllers\SignController::class, 'index'])->name('sign');
+    Route::get('/GymFit/signActivities' , [App\Http\Controllers\ActivityController::class, 'index'])->name('sign');
     Route::get('/GymFit/create' , [App\Http\Controllers\ActivityController::class, 'create'])->name('activity.create');
 
     //Rutas Post

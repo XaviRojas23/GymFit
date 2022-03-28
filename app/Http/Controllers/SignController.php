@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Sign;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,9 @@ class SignController extends Controller
     }
     public function index()
     {
-        return view('Activity.sign');
+/*         $sign = auth()->user()->sign;
+ */
+
     }
 
     /**

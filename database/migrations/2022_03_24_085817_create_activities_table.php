@@ -13,31 +13,32 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('activities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('Descripcion');
-            $table->string('Categoria');
-            $table->string('Dificultad');
-            $table->time('inicio');
-            $table->time('fin');
-            $table->rememberToken();
-            $table->timestamps();
-        });
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('Descripcion');
             $table->timestamps();
         });
-        Schema::create('dificultades', function (Blueprint $table) {
+        Schema::create('dificultads', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->timestamps();
         });
-        Schema::create('lugares', function (Blueprint $table) {
+        Schema::create('lugars', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->timestamps();
+        });
+        Schema::create('activities', function (Blueprint $table) {
+            $table->id();
+            $table->foreignid('user_id')->constrained()->onDelete('cascade');
+            $table->string('name')->unique();
+            $table->string('descripcion');
+            $table->foreignid('categoria_id')->constrained()->onDelete('cascade');
+            $table->foreignid('dificultad_id')->constrained()->onDelete('cascade');
+            $table->foreignid('lugar_id')->constrained()->onDelete('cascade');
+            $table->time('inicio');
+            $table->time('fin');
             $table->timestamps();
         });
 
@@ -52,8 +53,8 @@ return new class extends Migration
     {
         Schema::dropIfExists('activities');
         Schema::dropIfExists('categorias');
-        Schema::dropIfExists('dificultades');
-        Schema::dropIfExists('lugares');
+        Schema::dropIfExists('dificultads');
+        Schema::dropIfExists('lugars');
 
     }
 };
