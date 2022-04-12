@@ -37,10 +37,12 @@ return new class extends Migration
             $table->foreignid('categoria_id')->constrained()->onDelete('cascade');
             $table->foreignid('dificultad_id')->constrained()->onDelete('cascade');
             $table->foreignid('lugar_id')->constrained()->onDelete('cascade');
+            $table->string('images');
             $table->time('inicio');
             $table->time('fin');
             $table->timestamps();
         });
+
 
     }
 
@@ -55,6 +57,7 @@ return new class extends Migration
         Schema::dropIfExists('categorias');
         Schema::dropIfExists('dificultads');
         Schema::dropIfExists('lugars');
+
 
     }
 };

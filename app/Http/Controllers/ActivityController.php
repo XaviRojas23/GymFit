@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Activity\StoreRequest;
+use Carbon\Carbon;
+use App\Models\Lugar;
 use App\Models\Activity;
 use App\Models\Categoria;
 use App\Models\Dificultad;
-use App\Models\Lugar;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ActivityController extends Controller
 {
@@ -26,6 +29,30 @@ class ActivityController extends Controller
         return view('Activity.sign', compact('activities'));
     }
 
+    /* public function test($request)
+    {
+        $start_date = Carbon::createFromFormat('d/m/Y', $request->input('start_date'));
+        $end_date = Carbon::createFromFormat('d/m/Y', $request->input('end_date'));
+        // Calendario de esta semana
+        Activity::whereHas('activity_days', function ($query) use ($start_date, $end_date) {
+            $query
+                ->where(function ($query) use ($start_date, $end_date) {
+                    $query
+                        ->where('specific_date', '>=', $start_date)
+                        ->where('specific_date', '<=', $end_date);
+                })
+                ->orWhereNotNull('recurrent_date');
+
+        })->get();
+
+        $weekDays = [];
+        $day = $start_date;
+        while($day <= $end_date) {
+            $weekDays[] = $day->clone();
+            $day->addDay();
+        }
+    } */
+
     /**
      * Show the form for creating a new resource.
      *
@@ -37,8 +64,7 @@ class ActivityController extends Controller
         $dificultads = Dificultad::all();
         $lugars = Lugar::all();
 
-
-        return view('Activity.create', compact('categorias','dificultads','lugars'));
+        return view('Activity.create', compact('categorias', 'dificultads', 'lugars'));
     }
 
     /**
@@ -47,29 +73,26 @@ class ActivityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'descripcion' => 'required',
-            'categoria' => 'required',
-            'dificultad' => 'required',
-            'lugar' => 'required',
-            'inicio' => 'date_format:H:i',
-            'fin' => 'date_format:H:i|after:inicio'
-        ]);
+        //$route_image = $request->file('images')->storeAs('upload-activity', 'test.jpg');
+        $route_image = $request->file('images')->store('upload-activity', 'public');
+
+        $img = Image::make(public_path("storage/{$route_image}"))->fit(600,600);
+        $img->save();
 
          auth()->user()->activity()->create([
-            'name' => $data ['name'],
-            'descripcion' => $data ['descripcion'],
-            'categoria_id' => $data ['categoria'],
-            'dificultad_id' => $data ['dificultad'],
-            'lugar_id' => $data ['lugar'],
-            'inicio' => $data ['inicio'],
-            'fin'=> $data ['fin']
+            'name' => $request->input('name'),
+            'descripcion' => $request->input('descripcion'),
+            'categoria_id' => $request->input('categoria'),
+            'dificultad_id' => $request->input('dificultad'),
+            'lugar_id' => $request->input('lugar'),
+            'images' => $route_image,
+            'inicio' => $request->input('inicio'),
+            'fin'=> $request->input('fin')
         ]);
 
-        return redirect()->action([SignController::class , 'index']);
+        return redirect()->action([ActivityController::class , 'index']);
 
     }
 
@@ -92,7 +115,16 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        //
+        $categorias = Categoria::all();
+        $dificultads = Dificultad::all();
+        $lugars = Lugar::all();
+
+        return view('Activity.edit')
+            ->with('categoria',$categorias)
+            ->with('categoria',$dificultads)
+            ->with('categoria',$lugars)
+            ->with('activity', $activity);
+
     }
 
     /**
@@ -104,7 +136,7 @@ class ActivityController extends Controller
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        return('Hola desde update');
     }
 
     /**

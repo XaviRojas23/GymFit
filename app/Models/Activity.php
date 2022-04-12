@@ -16,6 +16,12 @@ class Activity extends Model
         'categoria_id',
         'dificultad_id',
         'lugar_id',
+        'images',
+        'inicio',
+        'fin'
+    ];
+
+    protected $dates = [
         'inicio',
         'fin'
     ];
@@ -28,5 +34,10 @@ class Activity extends Model
     }
     public function lugar(){
         return $this->belongsTo(Lugar::class);
+    }
+
+    public function activity_days()
+    {
+        return $this->hasMany(ActivityDay::class)->orderBy('start_time');
     }
 }

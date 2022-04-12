@@ -3,6 +3,7 @@
     @section('navegation')
         @include('ui.admin')
     @endsection
+
     <div class="container">
         <h1 class="text-center">Crear nueva actividad</h1>
         <div class="mt-5 row justify-content-center">
@@ -10,7 +11,7 @@
             action="{{route('activity.store')}}"
             method="POST"
             enctype="multipart/form-data"
-            >
+            novalidate>
             @csrf
                 <fieldset class="border p-4">
                     <legend class="text-center">Actividad</legend>
@@ -94,6 +95,9 @@
                                 {{$message}}
                             </div>
                             @enderror
+                    </div>
+                    <div class="m-5 rounded">
+                        <input type="file" id="images" name="images" src="" alt="">
                     </div>
                 </fieldset>
 

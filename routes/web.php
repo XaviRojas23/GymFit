@@ -25,6 +25,9 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('/home' , [App\Http\Controllers\GymController::class, 'index'])->name('gym');
     Route::get('/GymFit/signActivities' , [App\Http\Controllers\ActivityController::class, 'index'])->name('sign');
     Route::get('/GymFit/create' , [App\Http\Controllers\ActivityController::class, 'create'])->name('activity.create');
+    Route::get('/GymFit/{activity}' , [App\Http\Controllers\ActivityController::class, 'show'])->name('activity.show');
+    Route::get('/GymFit/edit/{activity}' , [App\Http\Controllers\ActivityController::class, 'edit'])->name('activity.edit');
+
 
     //Rutas Post
     Route::post('/GymFit/store' , [App\Http\Controllers\ActivityController::class, 'store'])->name('activity.store');
